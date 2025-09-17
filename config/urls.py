@@ -21,7 +21,7 @@ from users import views as user_views
 urlpatterns = [
     path('admin/', admin.site.urls),
 
-    # todo
+
     path('todo/', todo_list, name='todo_list'),
     path('todo/create/', todo_create, name='todo_create'),
     path('todo/<int:todo_id>/', todo_info, name='todo_info'),
