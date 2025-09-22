@@ -61,11 +61,21 @@
             <button class="btn btn-primary" type="submit">Search</button>
         </div>
     </form>
-    <ul class="list-unstyled">
+    <div class="list-group mb-3">
         {% for todo in page_obj.object_list %}
-            <li class="todo-list-item"><a href="{% url 'cbv_todo_info' todo.id %}">[{{ todo.user.username }}] {{ todo.title }}</a></li>
+            {% if todo.is_completed %}
+                <div class="list-group-item list-group-item-action">
+                    <img class="img-thumbnail" src="{{ todo.thumbnail.url }}" alt="썸네일이미지" style="width: 100px; height: 100px; object-fit: contain;">
+                    <a class="text-decoration-none text-black" href="{% url 'cbv_todo_info' todo.id %}">[{{ todo.user.username }}]{{ todo.title }} (Completed)</a>
+                </div>
+            {% else %}
+                <div class="list-group-item list-group-item-action">
+                    <img class="img-thumbnail" src="{{ todo.thumbnail.url }}" alt="썸네일이미지" style="width: 100px; height: 100px; object-fit: contain;">
+                    <a class="text-decoration-none text-black" href="{% url 'cbv_todo_info' todo.id %}">[{{ todo.user.username }}] {{ todo.title }}</a>
+                </div>
+            {% endif %}
         {% endfor %}
-    </ul>
+    </div>
     {% include 'pagination.html' %}
     {% endif %}
 </div>
